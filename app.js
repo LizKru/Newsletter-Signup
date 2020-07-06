@@ -31,18 +31,26 @@ app.post('/', function(req, res) {
     var url = 'https://us10.api.mailchimp.com/3.0/lists/33541f9080';
     var options = {
         method: "post",
-        auth: "LizKru:6d19d8c4b7964f5a4d01515451e7ac26-us10"
+        auth: "LizKru:16d19d8c4b7964f5a4d01515451e7ac26-us10"
     };
 
     const request = https.request(url, options, function(response) {
-        response.on("data", (data) => console.log(JSON.parse(data)))
+        response.on("data", function(data) {
+            console.log(JSON.parse(data));
+            if (response.statusCode === 200) {
+                res.sendFile(__dirname + "/success.html");
+            } else {
+                res.sendFile(__dirname + "/failure.html");
+            }
+        });
     });
 
     request.write(jsonData);
+
     request.end();
 });
 
+app.post('/failure', function(req, res) {
+    res.redirect('/');
+});
 app.listen(port, () => console.log("Server is running on port " + port));
-
-//6d19d8c4b7964f5a4d01515451e7ac26-us10
-//33541f9080
