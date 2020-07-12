@@ -31,7 +31,7 @@ app.post('/', function(req, res) {
     var url = 'https://us10.api.mailchimp.com/3.0/lists/33541f9080';
     var options = {
         method: "post",
-        auth: "LizKru:16d19d8c4b7964f5a4d01515451e7ac26-us10"
+        auth: "LizKru:6d19d8c4b7964f5a4d01515451e7ac26-us10"
     };
 
     const request = https.request(url, options, function(response) {
